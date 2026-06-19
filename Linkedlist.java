@@ -1,5 +1,4 @@
 import java.util.LinkedList;
-import java.util.List;
 class Linkedlist
 {
     public static void main(String[] args)
@@ -16,6 +15,5 @@ class Linkedlist
          System.out.println(li);
          li.remove("rani");
          System.out.println(li);
-    
     }
 }
