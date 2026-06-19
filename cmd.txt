@@ -1,0 +1,116 @@
+use ethnotech;
+create table student(
+    name varchar(20),
+    id int primary key,
+    dept varchar(10)
+);
+insert into student values('chitti',1,'csd');
+insert into student values('laari',2,'cse');
+insert into student values('pushpa',3,'cst');
+insert into student values('chandana',4,'ece');
+select * from student;
+alter table student add phno bigint;
+update student set phno=9876548979 where id=1;
+update student set phno=9874857379 where id=2;
+update student set phno=8243796179 where id=3;
+update student set phno=7896542801 where id=4;
+select * from student;
+alter table student add email varchar(20);
+alter table student rename column email to address;
+update student set address='kadapa' where id=1;
+update student set address='chittoor' where id=2;
+update student set address='hindupur' where id=3;
+update student set address='punganur' where id=4;
+select * from student;
+alter table student drop column address
+select * from student;
+create database student_db;
+use student_db;
+create table student_details(id int auto_increment primary key,name varchar(20) not null,email varchar(30) unique not null, age int, city varchar(20),score decimal(5,2) default 0.00,enroll date,is_active boolean default true created_at timestamp default current_timestamp);
+insert into student_details(id,name,email,age,city,score,enroll,is_active)values
+(1,'chitti','chinna@gmail.com',19,'plvd',85.00,'2026-06-20',true),
+(2,'laari','laari@gmail.com',20,'tirupati',89.30,'2026-06-15',true),
+(3,'venni','venni@gmail.com',21,'chittoor',79.30,'2026-06-25',true);
+select * from student_details;
+select id,name,age,city from student_details;
+select distinct age from student_details;
+select distinct name from student_details
+select * from student_details where city!='kadapa';
+select * from student_details where city='kadapa';
+select * from student_details where age>19 and score>80;
+select * from student_details where score between 75 and 80
+select * from student_details where city in('plvd','kadapa'); 
+select * from student_details where name like 'chitti'
+select * from student_details where age is null;
+select * from student_details where age is not null;
+select * from student_details where name like '%i';
+select * from student_details where name like 'v%';
+select * from student_details where name like '%h%';
+select * from student_details order by age asc;
+set @name='chitti';
+select @name
+set @age=20;
+select @age;
+select length(name) from student_details;
+select substr(name,1,4) from student_details;
+select substring(name,1,3) from student_details;
+select ceil(score),floor(score)
+from student_details;
+select abs(-89);
+select power(2,3);
+select mod(10,8);
+select date(enroll)
+from student_details;
+select datediff(now(),enroll) as days_since
+from student_details;
+select city,count(*) as total
+from student_details
+group by city;
+create database company;
+use company;
+create table sales(
+    id int,
+    name varchar(20),
+    amount int
+);
+insert into sales values
+(1,'chitti',100000),
+(2,'laari',20000),
+(3,'venni',90000),
+(4,'raji',14000),
+(5,'akki',5000);
+select * from sales;
+select count(*) from sales;
+select max(amount) from sales;
+select min(amount) from sales;
+select avg(amount) from sales;
+select sum(amount) from sales;
+
+
+use ethnotech;
+create table s1(id int primary key,name varchar(20),dept varchar(20));
+create table s2(id int,course varchar(20),marks int);
+insert into s1 values(1,"usha","ds");
+insert into s1 values(2,"sruthi","cse");
+insert into s1 values(3,"vyshu","ece");
+insert into s2 values(1,"data science","98");
+insert into s2 values(2,"cn","91");
+
+insert into s2 values(3,"vlsi","89");
+select s1.name,s2.marks from s1 inner join s2 where s1.id=s2.id;
+select id,name from s1 union select course,marks from s2;
+create table business(id int , amount int , name varchar(20));
+insert into business values (2,100000,"usha");
+insert into business values (1,10000,"sruthi");
+insert into business values (3,50000,"sri");
+select count(*) from business;
+select sum(amount) from business;
+select count(amount) from business;
+select min(amount) from business;
+select max(amount) from business;
+select avg(amount) from business;
+SELECT name, SUM(amount) AS total_sales FROM business WHERE amount >= 500 GROUP BY name HAVING SUM(amount) > 1000;
+select name from s1 where not exists ( select 2 from s2 where s1.id=s2.id);
+
+
+
